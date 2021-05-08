@@ -1,0 +1,15 @@
+<!-- Register -->
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+
+<h1>Sign up</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Register</button>
+</form>
+
+{% endblock %}
