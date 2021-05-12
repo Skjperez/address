@@ -2,10 +2,11 @@
 
 {% block title %}Contacts{% endblock %}
 
-<h2>Add New Contact</h2>
-    <form action="/add-contact/" method="post">
+{% block content %}
+<h2>Add Contact</h2>
+    <form action="/add/" method="post">
         {% csrf_token %} 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-{% endif %}
+
 {% endblock %}

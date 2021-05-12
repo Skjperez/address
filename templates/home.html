@@ -6,8 +6,8 @@
 {% block content %}
 {% if user.is_authenticated %}
     Welcome {{ user.username }} to your Address Book!
-    <h3>Add New Contact</h3>
-    <p><a href="/add-contact/">Add New Contact</a></p>
+    <h3>Contact List</h3>
+    <p><a href="/contactlist/add/">Add Contact</a></p>
     <p><a href="{% url 'logout' %}">Sign Out</a></p>
 {% else %}
     <p>You are not signed in</p>

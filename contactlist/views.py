@@ -24,21 +24,27 @@ def AddContact(request):
         #check to see if user is logged in
     if request.user.is_authenticated is True:
             #if POST request we need to process the form data
-        if request.method == 'POST':
-                #A form associated with the POST data
-            form = ContactForm(request.POST)
-                #to determine if the form is valid
-            if form.is_valid():
-                    #process the data inside the form
-                itemlist= Contact(
-                    user=request.user,
-                    contact_name=form.cleaned_data['contact_name'],
-                    contact_address=form.cleaned_data['contact_address'],
-                    contact_number=form.cleaned_data['contact_name'],
-                    contact_email=form.cleaned_data['contact_email'],
-                )
-                itemlist.save()
-                return HttpResponseRedirect('contactlist/home.html')
+        user = request.user
+    else:
+        return redirect('/login/')
+    
+    if request.method == 'POST':
+            #A form associated with the POST data
+        form = ContactForm(request.POST)
+            #to determine if the form is valid
+        if form.is_valid():
+                #process the data inside the form
+            itemlist=Contact(
+                user=user,
+                contact_name=form.cleaned_data['contact_name'],
+                contact_address=form.cleaned_data['contact_address'],
+                contact_number=form.cleaned_data['contact_name'],
+                contact_email=form.cleaned_data['contact_email'],
+            )
+            itemlist.save()
+            return redirect('home')
+    else:
+        return render(request,'add.html')
 
 
 
