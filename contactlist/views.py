@@ -10,30 +10,28 @@ def ContactList(request):
         user = request.user 
     else:
         return redirect('/address/login/')
-    return HttpResponse("Please enter your contact list")
+    contacts = Contact.object.all()
+    context = {
+        'form' : ContactForm,
+        'contacts' : contacts
+    }
+    return render(request, 'contactlist/home.html', context)
+    # return HttpResponse("Please enter your contact list")
 
-    #filtering the objects listed under Contacts in model
-    #user_contact_list = Contact.objects.filter(user=user)
-    #context = {
-        #'contact_list' : user_contact_list,
-        #'contact_form' : ContactForm()
-    #}
-    #return render(request,'contactlist.html',context)
 
 def AddContact(request):
-        #check to see if user is logged in
+    #check to see if user is logged in
     if request.user.is_authenticated is True:
             #if POST request we need to process the form data
         user = request.user
     else:
         return redirect('/login/')
-    
     if request.method == 'POST':
-            #A form associated with the POST data
+        # create a form instance and populate it with data from the request:
         form = ContactForm(request.POST)
-            #to determine if the form is valid
+        # check whether it's valid:
         if form.is_valid():
-                #process the data inside the form
+            # process the data in form.cleaned_data as required
             itemlist=Contact(
                 user=user,
                 contact_name=form.cleaned_data['contact_name'],
@@ -42,9 +40,18 @@ def AddContact(request):
                 contact_email=form.cleaned_data['contact_email'],
             )
             itemlist.save()
-            return redirect('home')
+            # redirect to a new URL:
+            return redirect('/')
+
+    # if a GET (or any other method) we'll create a blank form
     else:
-        return render(request,'add.html')
+        pass
+    form = ContactForm()
+
+    return render(request, 'add.html', {'form':form})
+
+            
+            
 
 
 

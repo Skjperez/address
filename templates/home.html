@@ -7,6 +7,9 @@
 {% if user.is_authenticated %}
     Welcome {{ user.username }} to your Address Book!
     <h3>Contact List</h3>
+    {% for contact in contacts %} 
+    <p>{{contact.contact_name}}</p>
+{% endfor %}
     <p><a href="/contactlist/add/">Add Contact</a></p>
     <p><a href="{% url 'logout' %}">Sign Out</a></p>
 {% else %}
