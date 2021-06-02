@@ -24,7 +24,6 @@ urlpatterns = [
     path('address/', include('django.contrib.auth.urls')),
     path('register/', include('register.urls')),
     path('contactlist/', include('contactlist.urls')),
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    #path('', TemplateView.as_view(template_name='contactlist.html'), name='add_contact')
+    path('', TemplateView.as_view(template_name='contactlist/list.html'), name='home'),
 
 ]

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ contactdata.contact_name }}{% endblock %}
+
+{% block content %}
+<a href="/contactlist/">Go Back</a>
+
+<p><strong>Name:</strong> {{ contactdata.contact_name }}</p>
+<p><strong>Address:</strong> {{ contactdata.contact_address }}</p>
+<p><strong>Phone Number:</strong> {{ contactdata.contact_number }}</p>
+<p><strong>Email:</strong> {{ contactdata.contact_email }}</p>
+
+
+{% endblock %}

@@ -1,22 +1,32 @@
 from django.shortcuts import render, redirect
 from .models import Contact
 from .forms import ContactForm
-from django.http import HttpResponse 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 
 # Create your views here.
-def ContactList(request):
+def ListContacts(request):
     if request.user.is_authenticated is True:
         user = request.user 
     else:
         return redirect('/address/login/')
-    contacts = Contact.object.all()
+    contacts = Contact.objects.all()
     context = {
-        'form' : ContactForm,
-        'contacts' : contacts
+        'contactlist' : contacts
     }
-    return render(request, 'contactlist/home.html', context)
+    return render(request, 'contactlist/list.html', context)
+    
+    
     # return HttpResponse("Please enter your contact list")
+
+def ReadContact(request, contact_id):
+    try:
+        contactdata = Contact.objects.get(id=contact_id)
+    except Contact.DoesNotExist:
+        raise Http404('Contact does not exist')
+    context = {
+        'contactdata': contactdata
+        }
+    return render(request, 'contactlist/read.html', context)
 
 
 def AddContact(request):
@@ -36,7 +46,7 @@ def AddContact(request):
                 user=user,
                 contact_name=form.cleaned_data['contact_name'],
                 contact_address=form.cleaned_data['contact_address'],
-                contact_number=form.cleaned_data['contact_name'],
+                contact_number=form.cleaned_data['contact_number'],
                 contact_email=form.cleaned_data['contact_email'],
             )
             itemlist.save()
@@ -47,8 +57,8 @@ def AddContact(request):
     else:
         pass
     form = ContactForm()
-
-    return render(request, 'add.html', {'form':form})
+    context = {'form':form}
+    return render(request, 'contactlist/add.html', context)
 
             
             
