@@ -51,7 +51,7 @@ def AddContact(request):
             )
             itemlist.save()
             # redirect to a new URL:
-            return redirect('/')
+            return redirect('/contactlist/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -59,6 +59,37 @@ def AddContact(request):
     form = ContactForm()
     context = {'form':form}
     return render(request, 'contactlist/add.html', context)
+
+def UpdateContact(request, edit_id):
+    #get objects by id
+    editcontact = Contact.objects.get(id=edit_id)
+    #generate form with contact data preloaded
+    form = ContactForm(
+        initial= {
+            "contact_name" : editcontact.contact_name,
+            "contact_address" : editcontact.contact_address,
+            "contact_number" : editcontact.contact_number,
+            "contact_email" : editcontact.contact_email
+    
+        }
+    )
+    context = {
+        'editcontact' : editcontact,
+        'form' : form
+    }
+
+    #save form with updated data and return to specific contact page
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            editcontact.contact_name = form.cleaned_data["contact_name"]
+            editcontact.contact_address = form.cleaned_data["contact_address"]
+            editcontact.contact_number = form.cleaned_data["contact_number"]
+            editcontact.contact_email = form.cleaned_data["contact_email"]
+            editcontact.save()
+            return redirect(f'/contactlist/{edit_id}')
+    return render(request, 'contactlist/update.html', context)
+
 
             
             
