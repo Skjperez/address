@@ -9,7 +9,7 @@ def ListContacts(request):
         user = request.user 
     else:
         return redirect('/address/login/')
-    contacts = Contact.objects.all()
+    contacts = Contact.objects.filter(user=user)
     context = {
         'contactlist' : contacts
     }
@@ -89,6 +89,13 @@ def UpdateContact(request, edit_id):
             editcontact.save()
             return redirect(f'/contactlist/{edit_id}')
     return render(request, 'contactlist/update.html', context)
+
+def DeleteContact(request, edit_id):
+    #get contact by id
+    editcontact = Contact.objects.get(id=edit_id)
+    #delete contact
+    editcontact.delete()
+    return redirect('/contactlist/')
 
 
             
