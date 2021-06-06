@@ -1,17 +1,28 @@
 <!-- templates/registration/login.html -->
-{% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Sign In{% endblock %}
+<link href="{% static 'contactlist/css/bootstrap.min.css' %}" rel="stylesheet">
 
 {% block content %}
-<h2>Address Book Sign In</h2>
+<link href="{% static 'contactlist/css/signin.css' %}" rel="stylesheet">
+<body class="text-center">
+    
+    <main class="form-signin">
+<h2 class="h3 mb-3 fw-normal">Address Book Sign In</h2>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="w-100 btn btn-lg btn-primary">Sign in</button>
+    <div class="form-floating">
+        <input name="username" type="username" class="form-control" id="floatingInput" placeholder="Username">
+        <label for="floatingInput">Username</label>
+      </div>
+      <div class="form-floating">
+        <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+      </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
 </form>
-
 <p>If you do not have an account, please register</p>
     <a href="{% url 'signup' %}">Sign Up</a>
-
+</main>
+</body>
 {% endblock %}

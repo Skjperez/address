@@ -5,18 +5,12 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-    Welcome {{ user.username }} to your Address Book!
     <h3>Contact List</h3>
 
  <ul> {% for contact in contactlist %}
 <li><a href="/contactlist/{{ contact.id }}/">{{ contact.contact_name }}</a></li>
     {% endfor %}</ul>  
 
-<h2>{{contactdata.contact_name}}</h2>
-    <p><a href="/contactlist/add/">Add Contact</a></p>
-    <p><a href="{% url 'logout' %}">Sign Out</a></p>
-{% else %}
-    <p>You are not signed in</p>
-    <a href="{% url 'login' %}">Sign In</a>
+
 {% endif %}
 {% endblock %}

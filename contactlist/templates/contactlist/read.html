@@ -3,12 +3,17 @@
 {% block title %}{{ contactdata.contact_name }}{% endblock %}
 
 {% block content %}
-<a href="/contactlist/">Return to Contact List</a>
+<!--<a href="/contactlist/">Return to Contact List</a>-->
 
 <p><strong>Name:</strong> {{ contactdata.contact_name }}</p>
 <p><strong>Address:</strong> {{ contactdata.contact_address }}</p>
 <p><strong>Phone Number:</strong> {{ contactdata.contact_number }}</p>
 <p><strong>Email:</strong> {{ contactdata.contact_email }}</p>
 
-<a href="/contactlist/{{ contactdata.id }}/update/">Edit Contact</a>
+<button type="button" class="btn btn-outline-primary">
+    <a href="/contactlist/{{ contactdata.id }}/update/">Edit Contact</a>
+</button>
+<button type="button" class="btn btn-outline-primary">
+    <a href="/contactlist/{{ contactdata.id }}/delete">Delete</a>
+</button>
 {% endblock %}

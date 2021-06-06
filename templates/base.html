@@ -1,15 +1,76 @@
+{% load static %}
+
 <!-- templates/base.html -->
 <!DOCTYPE html>
-{% load static %}
 <html>
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'contactlist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'contactlist/css/navbar-top.css' %}" rel="stylesheet">
+    
+    
   </head>
  <body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/contactlist/">Address Book</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse"  id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="/contactlist/add/">Add Contact</a>
+          </li>
+        </ul>
+        <div class="d-flex align-content-end flex-wrap"  id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+            <a class="btn btn-outline-success" href="{% url 'logout' %}" role="button">Sign Out</a>
+            </li>
+        </ul>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}" role="button">Sign In</a>
+          </li>
+          {% endif %}
+        </ul>
+        </div>
+      </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <main class="container">
     {% block content %}{% endblock %} 
+  </main>
+
+  <script src="{% static 'contactlist/js/bootstrap.bundle.min.js' %}" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
       
   </body>
 </html>

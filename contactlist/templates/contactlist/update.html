@@ -8,7 +8,8 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Update</button>
-    <a href="/contactlist/{{ editcontact.id }}/delete">Delete</a>
+    <a class="btn btn-primary" href="/contactlist/{{ editcontact.id }}/delete" role="button">Delete</a>
+    
 </form>
 
 
