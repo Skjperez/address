@@ -10,10 +10,7 @@
 <p><strong>Phone Number:</strong> {{ contactdata.contact_number }}</p>
 <p><strong>Email:</strong> {{ contactdata.contact_email }}</p>
 
-<button type="button" class="btn btn-outline-primary">
-    <a href="/contactlist/{{ contactdata.id }}/update/">Edit Contact</a>
-</button>
-<button type="button" class="btn btn-outline-primary">
-    <a href="/contactlist/{{ contactdata.id }}/delete">Delete</a>
-</button>
+<a class="btn btn-outline-primary" href="/contactlist/{{ contactdata.id }}/update/">
+    Edit Contact
+</a>
 {% endblock %}

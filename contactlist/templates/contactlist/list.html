@@ -7,10 +7,27 @@
 {% if user.is_authenticated %}
     <h3>Contact List</h3>
 
- <ul> {% for contact in contactlist %}
-<li><a href="/contactlist/{{ contact.id }}/">{{ contact.contact_name }}</a></li>
-    {% endfor %}</ul>  
+<div>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Remove</th>
 
-
+        </tr>
+    </thead>
+    <tbody>
+    <ul> {% for contact in contactlist %}
+     <tr>  
+        <td><li><a href="/contactlist/{{ contact.id }}/">{{ contact.contact_name }}</a></li></td>
+        <td><a href="/contactlist/{{ contact.id }}/update/">Update</a></td>
+        <td><a href="/contactlist/{{ contact.id }}/delete/">Delete</a></td>
+        {% endfor %}</ul> 
+ 
+    </tr>
+    </tbody>
+</table>
+</div>
 {% endif %}
 {% endblock %}
